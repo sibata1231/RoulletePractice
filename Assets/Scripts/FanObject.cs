@@ -13,9 +13,9 @@ public class FanObject : MonoBehaviour {
     public void SetColor(Color color)    => m_circleImageMaterial.SetColor(m_circleMaterialColorId, color);
 
     public void Initialize() {
-        m_circleImageMaterial   = new Material(m_circleRenderer.material);
-        m_circleRenderer.material     = m_circleImageMaterial;
-        m_circleMaterialCountId = Shader.PropertyToID("_Count");
-        m_circleMaterialColorId = Shader.PropertyToID("_FanColor");
+        m_circleImageMaterial     = new Material(m_circleRenderer.material);
+        m_circleRenderer.material = m_circleImageMaterial;
+        m_circleMaterialCountId   = Shader.PropertyToID("_Count");
+        m_circleMaterialColorId   = Shader.PropertyToID("_FanColor");
     }
 }

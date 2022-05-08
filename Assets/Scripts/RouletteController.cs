@@ -7,7 +7,7 @@ public class RouletteController : MonoBehaviour {
     [Range(1, 256)] [SerializeField] private int m_maxNameMember = 1;
 
     [Header("< ----- Preset Component ----- >")]
-    //[SerializeField] private NameTextGenerator m_nameTextGenerator = default;
+    [SerializeField] private NameTextGenerator m_nameTextGenerator = default;
     [SerializeField] private FanObject         m_mainFanObject      = default;
     //[SerializeField] private DartAroow         m_dartArrow          = default;
     [SerializeField] private Transform         m_fanParentTransform = default;
@@ -16,8 +16,10 @@ public class RouletteController : MonoBehaviour {
     private float    m_timeCount;
 
     void Start() {
-        // Preset UI ‰Šú‰»
-        //m_nameTextGenerator.CreateMemeber(m_maxNameMember);
+        // UI ‰Šú‰»
+        m_nameTextGenerator.CreateMemeber(m_maxNameMember);
+
+        // FanObject
         m_mainFanObject.Initialize();
         m_mainFanObject.gameObject.SetActive(false);
         for (int i= 0; i < m_maxNameMember; i++) {
@@ -25,10 +27,10 @@ public class RouletteController : MonoBehaviour {
             var fanObject = obj.GetComponent<FanObject>();
             fanObject.Initialize();
             fanObject.SetPosition(360.0f / m_maxNameMember * i);
-            fanObject.SetColor((i % 2 == 0 ? Color.white : Color.black)*0.5f);
+            fanObject.SetColor((i % 2 == 0 ? Color.white : Color.black) * 0.5f);
         }
 
-        // •Ï”‰Šú‰»
+        // Initialize
         m_timeCount = 0;
     }
 
