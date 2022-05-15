@@ -82,30 +82,6 @@ Shader "Unlit/circle" {
 				return step(float4(1,1,1,1), color);
 			}
 
-			//float grad_rot(float2 st) {
-			//	float dx = 0.5 - st.x;
-			//	float dy = 0.5 - st.y;
-			//
-			//	float rad = atan2(dx, dy);
-			//	rad = rad * 180 / PI + 180;
-			//
-			//	float n = floor((_Time * 1000) / 360);
-			//	float offset = _Time * 1000;
-			//	rad = rad + n * 360;
-			//	float d1 = distance(rad, offset) / 50;
-			//	float d2 = distance(rad, offset + 360) / 50;
-			//	float d3 = distance(rad, offset - 360) / 50;
-			//
-			//	return min(min(d1, d2), d3);
-			//}
-			//
-			//float grid(float2 st) {
-			//	float r1 = -disc(st, 0.5) + disc(st, 0.495);
-			//	float r2 = -disc(st, 0.3) + disc(st, 0.295);
-			//	float r3 = -disc(st, 0.1) + disc(st, 0.095);
-			//	return r1 + r2 + r3;
-			//}
-
 			fixed4 frag(v2f i) : SV_Target{
 				return fan_shape(i.uv, 360/ _DivisionCount) * _FanColor;// *grad_rot(i.uv) + grid(i.uv);
 			}
