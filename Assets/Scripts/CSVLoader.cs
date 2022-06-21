@@ -17,9 +17,9 @@ public class CSVLoader : MonoBehaviour {
     public string GetMamber(int index) => m_nameList[index][0];
     public string[] GetMamberList => m_nameList[0];
 
-    public void Initialize() {
+    public void Initialize(string fileName = "NameList") {
         m_nameList          = new List<string[]>();
-        m_csvFile           = Resources.Load("NameList") as TextAsset; // Resoucesâ∫ÇÃCSVì«Ç›çûÇ›
+        m_csvFile           = Resources.Load(fileName) as TextAsset; // Resources CSVì«Ç›çûÇ›
         StringReader reader = new StringReader(m_csvFile.text);
 
         int count = 0;

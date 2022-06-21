@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI    m_debugMemberListText = default;
     [SerializeField] private CSVLoader          m_csvLoader           = default;
     [SerializeField] private RouletteController m_rouletteController  = default;
+    [SerializeField] private string             m_fileName            = default;
+    [SerializeField] private string             m_targetName          = default;
 
     private ReactiveProperty<GameStatuses> m_gameStatuses;
     public GameStatuses GameStatuses {
@@ -37,9 +39,10 @@ public class GameController : MonoBehaviour {
     void Start() {
         m_gameStatuses = new ReactiveProperty<GameStatuses>();
         GameStatuses   = GameStatuses.MAIN;
-        m_dartArrow.Initialize();
-        m_csvLoader.Initialize();
+
+        m_csvLoader.Initialize(m_fileName);
         m_rouletteController.Initialize(m_csvLoader.CurrentMemberCount);
+        m_dartArrow.Initialize(m_csvLoader.CurrentMemberCount);
 
         // äeStateèàóù
         this.UpdateAsObservable()
@@ -62,7 +65,7 @@ public class GameController : MonoBehaviour {
             .Where(_ => GameStatuses != GameStatuses.GAME 
                         && Input.GetKeyDown(KeyCode.Alpha2))
             .Subscribe(_ => {
-                m_dartArrow.Initialize();
+                m_dartArrow.Initialize(m_csvLoader.CurrentMemberCount);
                 GameStatuses = GameStatuses.GAME;
                 Observable.Timer(TimeSpan.FromSeconds(1.5f)).Subscribe(_ =>{
                     m_dartArrow.Ready();
@@ -84,7 +87,7 @@ public class GameController : MonoBehaviour {
 
         m_dartArrow.OnLanded.Subscribe(x => {
             m_debugMemberListText.text = "";
-            m_debugNumberText.text = "ç°âÒÇÃéiâÔÇÕ...No." + x.ToString() + " : " + m_csvLoader.GetMamber(x - 1) + "Ç≥ÇÒÇ≈Ç∑ÅI";
+            m_debugNumberText.text = "ç°âÒÇÃ" + m_targetName.ToString() + "ÇÕ...No." + x.ToString() + " : " + m_csvLoader.GetMamber(x - 1) + "Ç≥ÇÒÇ≈Ç∑ÅI";
             for (int i = 1; i <= m_csvLoader.CurrentMemberCount; i++) {
                 m_debugMemberListText.text += i.ToString("00") + ":" + m_csvLoader.GetMamber(i - 1) + "\n";
             }

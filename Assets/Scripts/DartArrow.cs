@@ -13,6 +13,8 @@ public class DartArrow : MonoBehaviour {
     [SerializeField] private Renderer   m_renderer                 = default;
     private const float DART_BOARD_RADUIS = 0.3f;
     private Subject<int> onLandingSubject = new Subject<int>();
+    private int m_memberCount;
+
     public ReactiveProperty<(bool, Transform)> ShotProperty { get; private set; }
     public IObservable<int> OnLanded {
         get { return onLandingSubject; }
@@ -31,11 +33,12 @@ public class DartArrow : MonoBehaviour {
 
     private Vector3[] m_path;
 
-    public void Initialize() {
+    public void Initialize(int memberCount) {
         ShotProperty       = ShotProperty ?? new ReactiveProperty<(bool, Transform)>();
         ShotProperty.Value = (false, null);
         m_renderer.enabled = false;
         m_path             = DEAFAULT_PASS.ToArray();
+        m_memberCount      = memberCount;
     }
 
     public float Remap(float value, float from1 = 0, float to1 = 10, float from2 = -0.1f, float to2 = 0.1f) {
@@ -88,7 +91,7 @@ public class DartArrow : MonoBehaviour {
                          if (deg >= 180.0f) {
                              deg -= 360.0f;
                          }
-                         var value = Remap(deg, -180.0f, 180.0f, 0, 16);
+                         var value = Remap(deg, -180.0f, 180.0f, 0, m_memberCount);
                          onLandingSubject.OnNext(Mathf.CeilToInt(value));
                          ShotProperty.Value = (false, null);
                      });

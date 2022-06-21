@@ -20681,6 +20681,8 @@ MonoBehaviour:
   m_debugMemberListText: {fileID: 374392381}
   m_csvLoader: {fileID: 1645403607}
   m_rouletteController: {fileID: 404530759}
+  m_fileName: Test
+  m_targetName: "\u53F8\u4F1A"
 --- !u!114 &1645403607
 MonoBehaviour:
   m_ObjectHideFlags: 0
