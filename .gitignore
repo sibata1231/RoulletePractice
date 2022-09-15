@@ -58,5 +58,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-Assets/Resources/NameList.txt
-Assets/Resources/NameList.txt.meta
+Assets/Resources/NameList*
+Assets/Resources/Test*
+Assets/Plugins/
