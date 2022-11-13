@@ -17,6 +17,7 @@ Shader "Cosmic(Unlit)"
 		_StarMapYSpeed("Star Map (Y) Speed", Float) = -0.03
 	}
 	
+
 	SubShader
 	{
 		
